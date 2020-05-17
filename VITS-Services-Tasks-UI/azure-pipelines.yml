@@ -1,0 +1,23 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- development
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+stages:
+- stage: TST
+  variables:
+  - group: 'VITS.Services.General - UI - CI - VG - TST'
+  - group: 'VITS.Services.Tasks - UI - CI - VG - TST'
+  jobs:
+    - job: TST
+      steps:
+        - template: azure-buildtemplate.yml
+          parameters:
+            stageName: TST
